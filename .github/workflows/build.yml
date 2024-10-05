@@ -36,7 +36,7 @@ jobs:
           buildozer_version: stable
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Updated to version 3
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
