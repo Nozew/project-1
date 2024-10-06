@@ -202,5 +202,12 @@ class VocabularyApp(App):
         sm.add_widget(QuizScreen(name='quiz'))
         return sm
 
+    def on_back_button(self, window, key, *args):
+        if key == 27:  # Android geri butonu keycode'u 27'dir
+            if self.root.current != 'main':
+                self.root.current = 'main'  # Ana ekrana geri dön
+                return True  # Varsayılan davranışı önle (uygulamadan çıkma)
+            return False  # Varsayılan davranışın gerçekleşmesine izin ver (uygulamadan çıkma)
+
 if __name__ == '__main__':
     VocabularyApp().run()
