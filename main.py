@@ -123,7 +123,7 @@ class QuizScreen(Screen):
 
         self.layout = FloatLayout()
 
-        self.question_label = Label(text='', font_size=120, color=TEXT_COLOR,
+        self.question_label = Label(text='', font_size=130, color=TEXT_COLOR,
                                     pos_hint={'center_x': 0.5, 'center_y': 0.7})
         self.layout.add_widget(self.question_label)
 
@@ -136,14 +136,14 @@ class QuizScreen(Screen):
 
         self.score_label = Label(
             text='Score: 0',
-            font_size=70,
+            font_size=55,
             color=TEXT_COLOR,
             size_hint=(0.2, 0.1),  # Boyutlandırmayı ekranla orantılı yapmak için size_hint kullanıyoruz
             pos_hint={'right': 0.9, 'top': 1}  # Sağ üst köşe için pos_hint ayarları
         )
         self.layout.add_widget(self.score_label)
 
-        self.back_button = CustomButton(text='<-', size_hint=(0.1, 0.1), pos_hint={'x': 0.0, 'y': 0.9})
+        self.back_button = CustomButton(text='<-', size_hint=(0.1, 0.1), pos_hint={'x': 0.0, 'y': 0.93})
         self.back_button.bind(on_press=self.go_back)
         self.layout.add_widget(self.back_button)
 
