@@ -75,14 +75,14 @@ class LearnScreen(Screen):
 
         self.layout = FloatLayout()
 
-        self.word_label = Label(text='', font_size=120, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.75},
+        self.word_label = Label(text='', font_size=125, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.75},
                                 text_size=(Window.width * 0.9, None), halign="center", valign="middle")
 
-        self.meaning_label = Label(text='', font_size=70, color=TEXT_COLOR,
+        self.meaning_label = Label(text='', font_size=60, color=TEXT_COLOR,
                                    pos_hint={'center_x': 0.5, 'center_y': 0.55},
                                    text_size=(Window.width * 0.9, None), halign="center", valign="middle")
 
-        self.example_label = Label(text='', font_size=50, color=TEXT_COLOR,
+        self.example_label = Label(text='', font_size=60, color=TEXT_COLOR,
                                    pos_hint={'center_x': 0.5, 'center_y': 0.35},
                                    text_size=(Window.width * 0.9, None), halign="center", valign="middle")
 
