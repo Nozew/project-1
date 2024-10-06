@@ -7,8 +7,6 @@ from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
 from kivy.clock import Clock
-from kivy.base import EventLoop
-from kivy.utils import platform
 
 # Renk Tanımları
 BACKGROUND_COLOR = (0.1, 0.1, 0.1, 1)  # Koyu gri
@@ -90,17 +88,12 @@ class LearnScreen(Screen):
 
         self.next_button = CustomButton(text='Next', size_hint=(1, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.15})
 
-        # Geri tuşu düzenlendi
-        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.01, 'top': 0.99})
-
         self.layout.add_widget(self.word_label)
         self.layout.add_widget(self.meaning_label)
         self.layout.add_widget(self.example_label)
         self.layout.add_widget(self.next_button)
-        self.layout.add_widget(self.back_button)
 
         self.next_button.bind(on_press=self.show_next_word)
-        self.back_button.bind(on_press=self.go_back)
 
         self.add_widget(self.layout)
         self.show_next_word()
@@ -118,10 +111,6 @@ class LearnScreen(Screen):
                 random.shuffle(self.words)  # Kelimeleri yeniden karıştır
         else:
             self.word_label.text = "No words available."
-
-    def go_back(self, *args):
-        self.manager.current = 'main'  # Ana ekrana geri dön
-
 
 class QuizScreen(Screen):
     def __init__(self, **kwargs):
@@ -155,11 +144,6 @@ class QuizScreen(Screen):
         )
         self.layout.add_widget(self.score_label)
 
-        # Geri tuşu düzenlendi
-        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.01, 'top': 0.99})
-        self.back_button.bind(on_press=self.go_back)
-        self.layout.add_widget(self.back_button)
-
         self.add_widget(self.layout)
         self.show_new_question()
 
@@ -173,33 +157,23 @@ class QuizScreen(Screen):
         self.question_label.text = self.current_question['word']
         random_words = random.sample(self.words, 2)  # Sadece 2 rastgele kelime al
         options = random_words + [self.current_question]
-        random.shuffle(options)  # Seçenekleri karıştır
+        random.shuffle(options)
 
-        for i, button in enumerate(self.option_buttons):
-            button.text = options[i]['meaning']  # Her bir düğmeye anlamı ata
+        for i, word in enumerate(options):
+            self.option_buttons[i].text = word['meaning']
+            self.option_buttons[i].background_color = BUTTON_COLOR  # Buton rengini sıfırla
 
-        self.current_index += 1
+        self.current_index += 1  # Bir sonraki kelimeye geç
 
     def check_answer(self, instance):
-        selected_meaning = instance.text  # Seçilen butonun metnini al
-        correct_meaning = self.current_question['meaning']
-
-        for button in self.option_buttons:
-            button.unbind(on_press=self.check_answer)  # Tüm butonların olayı iptal et
-            if button.text == correct_meaning:
-                button.background_color = CORRECT_COLOR  # Doğru butonu yeşil yap
-            else:
-                button.background_color = INCORRECT_COLOR  # Yanlış butonu kırmızı yap
-
-        if selected_meaning == correct_meaning:
-            self.score += 1  # Doğru cevap verildiğinde puanı artır
-        self.score_label.text = f'Score: {self.score}'  # Puanı güncelle
-
-        Clock.schedule_once(self.show_new_question, 1.5)  # 1.5 saniye sonra yeni soruya geç
-
-    def go_back(self, *args):
-        self.manager.current = 'main'  # Ana ekrana geri dön
-
+        if instance.text != self.current_question['meaning']:
+            instance.background_color = INCORRECT_COLOR
+            return
+        else:
+            instance.background_color = CORRECT_COLOR
+            self.score += 1
+            self.score_label.text = f'Score: {self.score}'
+            Clock.schedule_once(lambda dt: self.show_new_question(), 0.2)
 
 class VocabularyApp(App):
     def build(self):
@@ -208,18 +182,7 @@ class VocabularyApp(App):
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(LearnScreen(name='learn'))
         sm.add_widget(QuizScreen(name='quiz'))
-
-        if platform == 'android':
-            EventLoop.window.bind(on_keyboard=self.on_back_button)
-
         return sm
-
-    def on_back_button(self, window, key, *args):
-        if key == 27:  # Android geri butonu keycode'u 27'dir
-            if self.root.current != 'main':
-                self.root.current = 'main'  # Ana ekrana geri dön
-                return True  # Varsayılan davranışı önle (uygulamadan çıkma)
-            return False  # Varsayılan davranışın gerçekleşmesine izin ver (uygulamadan çıkma)
 
 if __name__ == '__main__':
     VocabularyApp().run()
