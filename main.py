@@ -88,12 +88,17 @@ class LearnScreen(Screen):
 
         self.next_button = CustomButton(text='Next', size_hint=(1, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.15})
 
+        # Geri tuşu düzenlendi
+        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.01, 'top': 0.99})
+
         self.layout.add_widget(self.word_label)
         self.layout.add_widget(self.meaning_label)
         self.layout.add_widget(self.example_label)
         self.layout.add_widget(self.next_button)
+        self.layout.add_widget(self.back_button)
 
         self.next_button.bind(on_press=self.show_next_word)
+        self.back_button.bind(on_press=self.go_back)
 
         self.add_widget(self.layout)
         self.show_next_word()
@@ -149,6 +154,9 @@ class QuizScreen(Screen):
         self.layout.add_widget(self.score_label)
 
         # Geri tuşu düzenlendi
+        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.01, 'top': 0.99})
+        self.back_button.bind(on_press=self.go_back)
+        self.layout.add_widget(self.back_button)
 
         self.add_widget(self.layout)
         self.show_new_question()
