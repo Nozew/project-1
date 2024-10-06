@@ -143,7 +143,7 @@ class QuizScreen(Screen):
         )
         self.layout.add_widget(self.score_label)
 
-        self.back_button = CustomButton(text='<-', size_hint=(0.1, 0.1), pos_hint={'x': 0.0, 'y': 0.93})
+        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.00, 'y': 0.95})
         self.back_button.bind(on_press=self.go_back)
         self.layout.add_widget(self.back_button)
 
