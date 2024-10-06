@@ -80,8 +80,8 @@ class LearnScreen(Screen):
         self.word_label = Label(text='', font_size=28, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.8})
         self.meaning_label = Label(text='', font_size=22, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.6})
         self.example_label = Label(text='', font_size=18, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.4})
-        self.next_button = CustomButton(text='Next', size_hint=(0.3, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.2})
-        self.back_button = CustomButton(text='<-', size_hint=(0.1, 0.1), pos_hint={'x': 0.00, 'y': 0.9})
+        self.next_button = CustomButton(text='Next', size_hint=(1, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.2})
+        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.00, 'y': 0.9})
 
         self.layout.add_widget(self.word_label)
         self.layout.add_widget(self.meaning_label)
@@ -123,7 +123,7 @@ class QuizScreen(Screen):
 
         self.layout = FloatLayout()
 
-        self.question_label = Label(text='', font_size=28, color=TEXT_COLOR,
+        self.question_label = Label(text='', font_size=50, color=TEXT_COLOR,
                                     pos_hint={'center_x': 0.5, 'center_y': 0.7})
         self.layout.add_widget(self.question_label)
 
