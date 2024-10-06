@@ -29,8 +29,6 @@ WORDS = [
     {"word": "across", "meaning": "karşısında", "example": "The park is across the street."}
 ]
 
-
-
 class MainScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -55,7 +53,6 @@ class MainScreen(Screen):
         self.manager.transition = SlideTransition(direction='left')
         self.manager.current = 'quiz'
 
-
 class CustomButton(Button):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -67,7 +64,6 @@ class CustomButton(Button):
 
     def on_leave(self, *args):
         self.background_color = BUTTON_COLOR  # Normal duruma döndür
-
 
 class LearnScreen(Screen):
     def __init__(self, **kwargs):
@@ -81,7 +77,9 @@ class LearnScreen(Screen):
         self.meaning_label = Label(text='', font_size=22, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.6})
         self.example_label = Label(text='', font_size=18, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.4})
         self.next_button = CustomButton(text='Next', size_hint=(1, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.2})
-        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.00, 'y': 0.9})
+
+        # Geri tuşu düzenlendi
+        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.01, 'top': 0.99})
 
         self.layout.add_widget(self.word_label)
         self.layout.add_widget(self.meaning_label)
@@ -111,6 +109,7 @@ class LearnScreen(Screen):
 
     def go_back(self, *args):
         self.manager.current = 'main'  # Ana ekrana geri dön
+
 class QuizScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -143,7 +142,8 @@ class QuizScreen(Screen):
         )
         self.layout.add_widget(self.score_label)
 
-        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.00, 'y': 0.9})
+        # Geri tuşu düzenlendi
+        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.01, 'top': 0.99})
         self.back_button.bind(on_press=self.go_back)
         self.layout.add_widget(self.back_button)
 
@@ -174,31 +174,22 @@ class QuizScreen(Screen):
             return
         else:
             instance.background_color = CORRECT_COLOR
-
-        self.score += 1
-        self.score_label.text = f'Score: {self.score}'
-
-        Clock.schedule_once(lambda dt: self.show_new_question(), 0.2)  # 0.2 saniye gecikme ile yeni soru göster
+            self.score += 1
+            self.score_label.text = f'Score: {self.score}'
+            Clock.schedule_once(lambda dt: self.show_new_question(), 1)
 
     def go_back(self, *args):
-        self.manager.current = 'main'  # Ana ekrana geri dön
-        self.score = 0  # Skoru sıfırla
-
+        self.manager.transition = SlideTransition(direction='right')
+        self.manager.current = 'main'
 
 class VocabularyApp(App):
     def build(self):
-        Window.clearcolor = BACKGROUND_COLOR  # Arka plan rengi
+        Window.clearcolor = BACKGROUND_COLOR
         sm = ScreenManager(transition=FadeTransition())
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(LearnScreen(name='learn'))
         sm.add_widget(QuizScreen(name='quiz'))
         return sm
 
-    def on_stop(self):
-        # Perform any cleanup here if necessary
-        pass
-
-
 if __name__ == '__main__':
     VocabularyApp().run()
-
