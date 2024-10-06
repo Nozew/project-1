@@ -187,7 +187,7 @@ class QuizScreen(Screen):
             instance.background_color = CORRECT_COLOR
             self.score += 1
             self.score_label.text = f'Score: {self.score}'
-            Clock.schedule_once(lambda dt: self.show_new_question(), 1)
+            Clock.schedule_once(lambda dt: self.show_new_question(), 0.2)
 
     def go_back(self, *args):
         self.manager.transition = SlideTransition(direction='right')
