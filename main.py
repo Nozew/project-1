@@ -201,14 +201,9 @@ class VocabularyApp(App):
         sm.add_widget(LearnScreen(name='learn'))
         sm.add_widget(QuizScreen(name='quiz'))
         return sm
+    def on_key_down(self, window, key, *args):
 
-    def on_back_pressed(self):
-        # Eğer ana ekrandaysanız, uygulamadan çık
-        if self.root.current == 'main':
-            App.get_running_app().stop()
-        else:
-            # Ana ekrana dön
-            self.root.current = 'main'
+        self.root.current = 'main'  # Ana ekrana geri dön
 
 if __name__ == '__main__':
     VocabularyApp().run()
