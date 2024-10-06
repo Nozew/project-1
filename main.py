@@ -65,6 +65,7 @@ class CustomButton(Button):
     def on_leave(self, *args):
         self.background_color = BUTTON_COLOR  # Normal duruma döndür
 
+
 class LearnScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -73,9 +74,18 @@ class LearnScreen(Screen):
         self.current_index = 0
 
         self.layout = FloatLayout()
-        self.word_label = Label(text='', font_size=120, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.8})
-        self.meaning_label = Label(text='', font_size=50, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.6})
-        self.example_label = Label(text='', font_size=50, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.4})
+
+        self.word_label = Label(text='', font_size=120, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.75},
+                                text_size=(Window.width * 0.9, None), halign="center", valign="middle")
+
+        self.meaning_label = Label(text='', font_size=50, color=TEXT_COLOR,
+                                   pos_hint={'center_x': 0.5, 'center_y': 0.55},
+                                   text_size=(Window.width * 0.9, None), halign="center", valign="middle")
+
+        self.example_label = Label(text='', font_size=50, color=TEXT_COLOR,
+                                   pos_hint={'center_x': 0.5, 'center_y': 0.35},
+                                   text_size=(Window.width * 0.9, None), halign="center", valign="middle")
+
         self.next_button = CustomButton(text='Next', size_hint=(1, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.15})
 
         # Geri tuşu düzenlendi
@@ -109,6 +119,7 @@ class LearnScreen(Screen):
 
     def go_back(self, *args):
         self.manager.current = 'main'  # Ana ekrana geri dön
+
 
 class QuizScreen(Screen):
     def __init__(self, **kwargs):
