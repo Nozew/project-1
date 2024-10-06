@@ -134,8 +134,13 @@ class QuizScreen(Screen):
             self.option_buttons.append(button)
             self.layout.add_widget(button)
 
-        self.score_label = Label(text='Score: 0', font_size=70, color=TEXT_COLOR,
-                                 pos_hint={'right': 1.3, 'top': 1.4})
+        self.score_label = Label(
+            text='Score: 0',
+            font_size=70,
+            color=TEXT_COLOR,
+            size_hint=(0.2, 0.1),  # Boyutlandırmayı ekranla orantılı yapmak için size_hint kullanıyoruz
+            pos_hint={'right': 0.9, 'top': 1}  # Sağ üst köşe için pos_hint ayarları
+        )
         self.layout.add_widget(self.score_label)
 
         self.back_button = CustomButton(text='<-', size_hint=(0.1, 0.1), pos_hint={'x': 0.0, 'y': 0.9})
