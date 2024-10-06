@@ -123,7 +123,7 @@ class QuizScreen(Screen):
 
         self.layout = FloatLayout()
 
-        self.question_label = Label(text='', font_size=150, color=TEXT_COLOR,
+        self.question_label = Label(text='', font_size=120, color=TEXT_COLOR,
                                     pos_hint={'center_x': 0.5, 'center_y': 0.7})
         self.layout.add_widget(self.question_label)
 
