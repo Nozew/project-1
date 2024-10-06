@@ -73,10 +73,10 @@ class LearnScreen(Screen):
         self.current_index = 0
 
         self.layout = FloatLayout()
-        self.word_label = Label(text='', font_size=28, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.8})
-        self.meaning_label = Label(text='', font_size=22, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.6})
-        self.example_label = Label(text='', font_size=18, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.4})
-        self.next_button = CustomButton(text='Next', size_hint=(1, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.2})
+        self.word_label = Label(text='', font_size=120, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.8})
+        self.meaning_label = Label(text='', font_size=50, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.6})
+        self.example_label = Label(text='', font_size=50, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.4})
+        self.next_button = CustomButton(text='Next', size_hint=(1, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.15})
 
         # Geri tuşu düzenlendi
         self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.01, 'top': 0.99})
@@ -97,8 +97,8 @@ class LearnScreen(Screen):
         if self.words:  # Eğer kelimeler varsa
             word = self.words[self.current_index]
             self.word_label.text = word['word']
-            self.meaning_label.text = f"Meaning: {word['meaning']}"
-            self.example_label.text = f"Example: {word['example']}"
+            self.meaning_label.text = word['meaning']
+            self.example_label.text = word['example']
 
             self.current_index += 1
             if self.current_index >= len(self.words):
