@@ -139,11 +139,11 @@ class QuizScreen(Screen):
             font_size=55,
             color=TEXT_COLOR,
             size_hint=(0.2, 0.1),  # Boyutlandırmayı ekranla orantılı yapmak için size_hint kullanıyoruz
-            pos_hint={'right': 0.9, 'top': 1}  # Sağ üst köşe için pos_hint ayarları
+            pos_hint={'right': 0.95, 'top': 1}  # Sağ üst köşe için pos_hint ayarları
         )
         self.layout.add_widget(self.score_label)
 
-        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.00, 'y': 0.95})
+        self.back_button = CustomButton(text='<-', size_hint=(0.15, 0.09), pos_hint={'x': 0.00, 'y': 0.9})
         self.back_button.bind(on_press=self.go_back)
         self.layout.add_widget(self.back_button)
 
