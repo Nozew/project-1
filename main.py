@@ -78,7 +78,7 @@ class LearnScreen(Screen):
         self.word_label = Label(text='', font_size=120, color=TEXT_COLOR, pos_hint={'center_x': 0.5, 'center_y': 0.75},
                                 text_size=(Window.width * 0.9, None), halign="center", valign="middle")
 
-        self.meaning_label = Label(text='', font_size=50, color=TEXT_COLOR,
+        self.meaning_label = Label(text='', font_size=70, color=TEXT_COLOR,
                                    pos_hint={'center_x': 0.5, 'center_y': 0.55},
                                    text_size=(Window.width * 0.9, None), halign="center", valign="middle")
 
