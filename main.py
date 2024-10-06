@@ -129,7 +129,7 @@ class QuizScreen(Screen):
 
         self.option_buttons = []
         for i in range(3):
-            button = CustomButton(text='', size_hint=(0.4, 0.1), pos_hint={'center_x': 0.5, 'y': 0.5 - (i * 0.15)})
+            button = CustomButton(text='', size_hint=(1, 0.1), pos_hint={'center_x': 0.5, 'y': 0.35 - (i * 0.13)})
             button.bind(on_press=self.check_answer)
             self.option_buttons.append(button)
             self.layout.add_widget(button)
